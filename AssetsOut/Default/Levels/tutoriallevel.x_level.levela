@@ -1,0 +1,16 @@
+LevelLoader.CreateGameObject("PEObject30_TImrod",0.0, 0.0, -1.0, 0.0, -0.0, 1.0, -0.0, 0.0, 1.0, 0.0, 0.0, 0.0, -364.249789, 0.0, 419.841017, 1.0, 'TutorialLevel.x_PEObject30_TImro.lua', 'Default',0x1139fc9e, 0x51a511ed, 0x827484fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject21_nazi_rep",0.147138, 0.0, -0.989116, 0.0, -0.0, 1.0, -0.0, 0.0, 0.989116, 0.0, 0.147138, 0.0, -368.636989, 0.0, -0.0, 1.0, 'TutorialLevel.x_PEObject21_nazi_.lua', 'Default',0x19acba30, 0x49b211ed, 0xa82784fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject16_polySurface1",1.0, 0.0, 0.0, 0.0, -0.0, 0.0, 1.0, 0.0, -0.0, -1.0, 0.0, 0.0, 0.0, 200.0, -0.0, 1.0, 'TutorialLevel.x_PEObject16_polyS.lua', 'Default',0x74508e0f, 0x326711ed, 0x99ae84fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject22_tArrow",-0.009666, 0.0, -0.999953, 0.0, -0.0, 1.0, -0.0, 0.0, 0.999953, 0.0, -0.009666, 0.0, -399.033575, 0.0, -0.0, 1.0, 'TutorialLevel.x_PEObject22_tArro.lua', 'Default',0x3220cc4f, 0x49b211ed, 0x81a984fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject29_pCar",0.826851, 0.0, -0.562421, 0.0, -0.0, 1.0, -0.0, 0.0, 0.562421, 0.0, 0.826851, 0.0, 442.177066, 0.0, 490.840646, 1.0, 'TutorialLevel.x_PEObject29_pCar.lua', 'Default',0x52527b0f, 0x4fdc11ed, 0xabd284fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject28_TImrod",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, 0.0, 0.0, 425.21854, 1.0, 'TutorialLevel.x_PEObject28_TImro.lua', 'Default',0x4205f700, 0x4fdc11ed, 0x896584fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject27_pPlane1",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -8.326546, 0.0, -4.034357, 1.0, 'TutorialLevel.x_PEObject27_pPlan.lua', 'Default',0xe742364f, 0x4c0f11ed, 0xac8784fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject23_tArrow",-0.002544, 0.0, 0.999997, 0.0, 0.0, 1.0, -0.0, 0.0, -0.999997, -0.0, -0.002544, 0.0, 401.677604, 0.0, -0.0, 1.0, 'TutorialLevel.x_PEObject23_tArro.lua', 'Default',0x3d36c7c0, 0x49b211ed, 0x861084fd, 0xd139d5e5)
+

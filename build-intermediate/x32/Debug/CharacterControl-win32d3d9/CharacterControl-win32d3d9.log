@@ -1,0 +1,8 @@
+﻿SoldierNPC.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+  CharacterControl-win32d3d9.vcxproj -> E:\PEWorkspace\build\CharacterControl-win32d3d9.exe
+  ..\External\DownloadedLibraries\glew-1.9.0\bin\glew32.dll
+  ..\External\DownloadedLibraries\glew-1.9.0\bin\glew32mx.dll
+          2 file(s) copied.
+          1 file(s) copied.
+          1 file(s) copied.
+          1 file(s) copied.

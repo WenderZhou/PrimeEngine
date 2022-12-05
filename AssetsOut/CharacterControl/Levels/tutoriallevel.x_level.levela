@@ -1,0 +1,6 @@
+LevelLoader.CreateGameObject("PEObject15_TImrod",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, 0.0, 0.0, -0.0, 1.0, 'TutorialLevel.x_PEObject15_TImro.lua', 'CharacterControl',0xb238574f, 0x325111ed, 0x92b484fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject0_pPlane1",1.0, 0.0, -0.0, 0.0, 0.0, 1.0, -0.0, 0.0, -0.0, -0.0, 1.0, 0.0, -8.326546, 0.0, -4.034357, 1.0, 'TutorialLevel.x_PEObject0_pPlane.lua', 'CharacterControl',0xc7a3b900, 0x2efe11ed, 0x9c0784fd, 0xd139d5e5)
+
+LevelLoader.CreateGameObject("PEObject4_polySurface1",1.0, 0.0, 0.0, 0.0, -0.0, -0.076193, 0.997093, 0.0, -0.0, -0.997093, -0.076193, 0.0, 23.438697, 375.865711, -255.941941, 1.0, 'TutorialLevel.x_PEObject4_polySu.lua', 'CharacterControl',0x8f5d778f, 0x2f0611ed, 0x8db984fd, 0xd139d5e5)
+

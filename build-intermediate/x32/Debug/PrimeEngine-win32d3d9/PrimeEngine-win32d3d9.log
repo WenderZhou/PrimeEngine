@@ -1,0 +1,3 @@
+﻿  ParticleSystem.cpp
+E:\PEWorkspace\Code\PrimeEngine\ParticleSystem\ParticleSystem.cpp(108,27): warning C4018: '<': signed/unsigned mismatch
+  PrimeEngine-win32d3d9.vcxproj -> E:\PEWorkspace\build\PrimeEngine-win32d3d9.lib
