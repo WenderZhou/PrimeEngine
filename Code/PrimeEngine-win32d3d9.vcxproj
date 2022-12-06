@@ -722,6 +722,7 @@
     <None Include="..\AssetsOut\Default\GPUPrograms\DetailedSkin_Shadowed_VS.cgvs" />
     <None Include="..\AssetsOut\Default\GPUPrograms\DetailedSkin_Structs.fx" />
     <None Include="..\AssetsOut\Default\GPUPrograms\DetailedSkin_ZOnly_VS.cgvs" />
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_Structs.fx" />
     <None Include="..\AssetsOut\Default\GPUPrograms\ReducedMesh_Title_PS.fx" />
     <None Include="..\AssetsOut\Default\GPUPrograms\Replace_BS.fx" />
     <None Include="..\AssetsOut\Default\GPUPrograms\SkyBox.fx" />
@@ -739,8 +740,8 @@
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Diffuse_A_0_PS.cgps" />
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Diffuse_A_RGBIntensity_PS.cgps" />
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Diffuse_PS.cgps" />
-    <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Particle_PS.cgps" />
-    <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Particle_VS.cgvs" />
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_PS.cgps" />
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_VS.cgvs" />
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Shadowed_A_0_PS.cgps" />
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Shadowed_PS.fx" />
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Shadowed_VS.cgvs" />
@@ -932,6 +933,7 @@
     <None Include="..\AssetsOut\Default\Textures\cobble2_color.dds" />
     <None Include="..\AssetsOut\Default\Textures\cobble2_normal.dds" />
     <None Include="..\AssetsOut\Default\Textures\cobble2_spec.dds" />
+    <None Include="..\AssetsOut\Default\Textures\fire.dds" />
     <None Include="..\AssetsOut\Default\Textures\font512.dds" />
     <None Include="..\AssetsOut\Default\Textures\ground084.dds" />
     <None Include="..\AssetsOut\Default\Textures\ground084_NRM.dds" />
@@ -1116,9 +1118,6 @@
     <None Include="PrimeEngine\Lua\peuuid.lua" />
     <None Include="PrimeEngine\Scene\Skeleton.lua" />
     <None Include="PrimeEngine\premake4-primeengine.lua" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\AssetsOut\Default\Textures\fire.dds" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

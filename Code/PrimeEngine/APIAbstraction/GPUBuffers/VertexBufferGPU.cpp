@@ -735,6 +735,43 @@ void VertexBufferGPU::createGPUBufferFromSource_StdMesh(PositionBufferCPU &vb, T
 	setAPIValues();
 }
 
+void VertexBufferGPU::createGPUBufferFromSource_ParticleMesh(PositionBufferCPU& vb, TexCoordBufferCPU& tcb, ColorBufferCPU& cb)
+{
+	//ogl is still using old way of passing all buffers into lower level implmentation
+	// we should be able to support multiple buffer and single buffer implementations
+#if APIABSTRACTION_OGL
+	memset(m_bufs, 0, sizeof(m_bufs));
+	m_buf = OGL_VertexBufferGPU::CreateVertexBufferInGPUFromVbNbTb(
+		*m_pContext, m_arena,
+		&vb, &cb, &tcb, NULL, NULL, NULL, true, &m_bufs[0]);
+	m_vertexSize = sizeof(PrimitiveTypes::Float32) * 8;
+	m_length = vb.getByteSize() / 3 / sizeof(PrimitiveTypes::Float32);
+
+	m_pBufferSetInfo = &VertexBufferGPUManager::Instance()->m_vertexBufferInfos[???];
+#else
+	PositionBufferCPU res(*m_pContext, m_arena);
+	res.m_values.reset((vb.m_values.m_size / 3) * (3 + 2 + 4));
+
+	for (PrimitiveTypes::UInt32 iv = 0; iv < vb.m_values.m_size / 3; iv++)
+	{
+		PrimitiveTypes::Float32 x, y, z, u, v, r, g, b, a;
+		x = vb.m_values[iv * 3]; y = vb.m_values[iv * 3 + 1]; z = vb.m_values[iv * 3 + 2];
+		u = tcb.m_values[iv * 2]; v = tcb.m_values[iv * 2 + 1];
+		r = cb.m_values[iv * 4]; g = cb.m_values[iv * 4 + 1]; b = cb.m_values[iv * 4 + 2]; a = cb.m_values[iv * 4 + 3];
+
+		res.m_values.add(x); res.m_values.add(y); res.m_values.add(z);
+		res.m_values.add(u); res.m_values.add(v);
+		res.m_values.add(r); res.m_values.add(g); res.m_values.add(b); res.m_values.add(a);
+	}
+
+	internalCreateGPUBufferFromCombined(res, sizeof(PrimitiveTypes::Float32) * (3 + 2 + 4));
+	res.m_values.reset(0);
+	m_pBufferSetInfo = &VertexBufferGPUManager::Instance()->m_vertexBufferInfos[PEVertexFormatLayout_ParticleMesh_B0__P0f3_TC0f2_C0f4];
+#endif
+
+
+	setAPIValues();
+}
 
 void VertexBufferGPU::setAPIValues()
 {

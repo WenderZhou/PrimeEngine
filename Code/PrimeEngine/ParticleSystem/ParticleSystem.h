@@ -33,8 +33,8 @@ struct ParticleProperty
 	float lifeTime;
 	float lifeTimeVariation;
 
-	Vector3 colorBegin;
-	Vector3 colorEnd;
+	Vector4 colorBegin;
+	Vector4 colorEnd;
 
 	float sizeBegin;
 	float sizeEnd;
@@ -48,7 +48,7 @@ struct Particle
 	float lifeLeft;
 	float lifeTime;
 
-	Vector3 color;
+	Vector4 color;
 	float size;
 
 	bool valid;

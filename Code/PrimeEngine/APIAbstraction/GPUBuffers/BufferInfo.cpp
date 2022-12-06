@@ -22,6 +22,7 @@ const char *toString(EPEVertexFormat f)
 	case PEVertexFormat_ReducedSkin: return "ReducedSkin";
 	case PEVertexFormat_StdSkin: return "StdSkin";
 	case PEVertexFormat_DetailedSkin: return "DetailedSkin";
+	case PEVertexFormat_ParticleMesh: return "ParticleMesh";
 	
 	default: PEASSERT(false, "Unknown format. Have you added new one and not modify this function?"); return "";
 	};
@@ -39,6 +40,8 @@ EPEVertexFormat getFormatFromVSName(const char *vsFilename)
 		return PEVertexFormat_DetailedMesh;
 	if (StringOps::startsswith(vsFilename, "DetailedSkin_"))
 		return PEVertexFormat_DetailedSkin;
+	if (StringOps::startsswith(vsFilename, "ParticleMesh_"))
+		return PEVertexFormat_ParticleMesh;
 
 	return PEVertexFormat_Count;
 }
@@ -63,6 +66,7 @@ const char *toString(EPEVertexFormatLayout v)
 	#if !PE_PLAT_IS_PSVITA // vita supports up to 4 vertex streams
 	case PEVertexFormatLayout_DetailedSkin_B0__P0f3_B1__TC0f2_B2__N0f3_B3__T0f3_B4__BW0f4_B5__BW1f4_B6__BI0f4_B7__BI1f4: return "PEVertexFormatLayout_DetailedSkin_B0__P0f3_B1__TC0f2_B2__N0f3_B3__T0f3_B4__BW0f4_B5__BW1f4_B6__BI0f4_B7__BI1f4";
 	#endif
+	case PEVertexFormatLayout_ParticleMesh_B0__P0f3_TC0f2_C0f4: return "PEVertexFormatLayout_ParticleMesh_B0__P0f3_TC0f2_C0f3";
 	default: PEASSERT(false, "Unknown layout. Have you added new one and not modify this function?"); return "";
 	};
 }

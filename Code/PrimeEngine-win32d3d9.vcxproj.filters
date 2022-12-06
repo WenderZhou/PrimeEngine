@@ -2521,6 +2521,9 @@
     <None Include="..\AssetsOut\Default\GPUPrograms\DetailedSkin_ZOnly_VS.cgvs">
       <Filter>AssetsOut\Default\GPUPrograms</Filter>
     </None>
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_Structs.fx">
+      <Filter>AssetsOut\Default\GPUPrograms</Filter>
+    </None>
     <None Include="..\AssetsOut\Default\GPUPrograms\ReducedMesh_Title_PS.fx">
       <Filter>AssetsOut\Default\GPUPrograms</Filter>
     </None>
@@ -2570,6 +2573,12 @@
       <Filter>AssetsOut\Default\GPUPrograms</Filter>
     </None>
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Diffuse_PS.cgps">
+      <Filter>AssetsOut\Default\GPUPrograms</Filter>
+    </None>
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_PS.cgps">
+      <Filter>AssetsOut\Default\GPUPrograms</Filter>
+    </None>
+    <None Include="..\AssetsOut\Default\GPUPrograms\ParticleMesh_VS.cgvs">
       <Filter>AssetsOut\Default\GPUPrograms</Filter>
     </None>
     <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Shadowed_A_0_PS.cgps">
@@ -3145,6 +3154,9 @@
     <None Include="..\AssetsOut\Default\Textures\cobble2_spec.dds">
       <Filter>AssetsOut\Default\Textures</Filter>
     </None>
+    <None Include="..\AssetsOut\Default\Textures\fire.dds">
+      <Filter>AssetsOut\Default\Textures</Filter>
+    </None>
     <None Include="..\AssetsOut\Default\Textures\font512.dds">
       <Filter>AssetsOut\Default\Textures</Filter>
     </None>
@@ -3697,16 +3709,5 @@
     <None Include="PrimeEngine\premake4-primeengine.lua">
       <Filter>PrimeEngine</Filter>
     </None>
-    <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Particle_VS.cgvs">
-      <Filter>AssetsOut\Default\GPUPrograms</Filter>
-    </None>
-    <None Include="..\AssetsOut\Default\GPUPrograms\StdMesh_Particle_PS.cgps">
-      <Filter>AssetsOut\Default\GPUPrograms</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\AssetsOut\Default\Textures\fire.dds">
-      <Filter>AssetsOut\Default\Textures</Filter>
-    </Image>
   </ItemGroup>
 </Project>

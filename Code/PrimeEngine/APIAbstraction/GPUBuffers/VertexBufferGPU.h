@@ -72,6 +72,8 @@ public:
 	void createGPUBufferFromSource_ReducedMesh(PositionBufferCPU &vb, TexCoordBufferCPU &tcb, WRITE_MODES writeMode = CONSTANT);
 	void createGPUBufferFromSource_StdMesh(PositionBufferCPU &vb, TexCoordBufferCPU &tcb, NormalBufferCPU &nb);
 	void createGPUBufferFromSource_DetailedMesh(PositionBufferCPU &vb, TexCoordBufferCPU &tcb, NormalBufferCPU &nb, TangentBufferCPU &tb);
+
+	void createGPUBufferFromSource_ParticleMesh(PositionBufferCPU& vb, TexCoordBufferCPU& tcb, ColorBufferCPU& cb);
 	
 	void createGPUBufferFromSource_MinimalSkin(PositionBufferCPU &vb, SkinWeightsCPU &weights);
 	void createGPUBufferFromSource_ReducedSkin(PositionBufferCPU &vb, TexCoordBufferCPU &tcb, SkinWeightsCPU &weights);

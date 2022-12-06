@@ -249,18 +249,18 @@ namespace PE {
 		Handle hEffect("EFFECT", sizeof(Effect));
 		Effect* pEffect = new(hEffect) Effect(*m_pContext, m_arena, hEffect);
 		pEffect->loadTechnique(
-			"StdMesh_Particle_VS", "main",
+			"ParticleMesh_VS", "main",
 			NULL, NULL, // geometry shader
-			"StdMesh_Particle_PS", "main",
+			"ParticleMesh_PS", "main",
 			NULL, NULL, // compute shader
 			PERasterizerState_SolidTriBackCull,
 			PEDepthStencilState_ZBuffer, PEAlphaBlendState_DefaultRGBLerp_A_DestUnchanged, // depth stencil, blend states
-			"StdMesh_Particle_Tech");
+			"ParticleMesh_Tech");
 
-		pEffect->m_psInputFamily = EffectPSInputFamily::STD_MESH_PS_IN;
+		pEffect->m_psInputFamily = EffectPSInputFamily::PARTICLE_MESH_PS_IN;
 		pEffect->m_effectDrawOrder = EffectDrawOrder::First;
 
-		m_map.add("StdMesh_Particle_Tech", hEffect);
+		m_map.add("ParticleMesh_Tech", hEffect);
 	}
 
 	{

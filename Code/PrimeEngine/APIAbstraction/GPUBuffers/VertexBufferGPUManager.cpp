@@ -140,6 +140,37 @@ Handle VertexBufferGPUManager::createGPUBufferFromVBufTCBufSWBufNBuf(Handle hvb,
 	return res;
 }
 
+Handle VertexBufferGPUManager::createGPUBufferFromVBufTCBufCBuf(Handle hvb, Handle htcb, Handle hcb, bool useBufferRegistry)
+{
+	Handle handles[] = { hvb, htcb, hcb, Handle() };
+
+	Handle res;
+
+	if (useBufferRegistry)
+	{
+		res = m_map.findHandle(handles);
+		if (res.isValid())
+		{
+			// already have it
+			return res;
+		}
+	}
+
+	res = Handle("VERTEX_BUFFER_GPU", sizeof(VertexBufferGPU));
+	VertexBufferGPU* pvbgpu = new(res) VertexBufferGPU(*m_pContext, m_arena);
+
+	pvbgpu->createGPUBufferFromSource_ParticleMesh(
+		*hvb.getObject<PositionBufferCPU>(),
+		*htcb.getObject<TexCoordBufferCPU>(),
+		*hcb.getObject<ColorBufferCPU>()
+	);
+
+	if (useBufferRegistry)
+		m_map.add(handles, res);
+
+	return res;
+}
+
 Handle VertexBufferGPUManager::createFromSource_ColoredMinimalMesh(Handle hpb, Handle hcb, bool useBufferRegistry)
 {
 	PEASSERT(!useBufferRegistry, "Since right now colored minimal meshes are for debug purposes only, we dotn allow using bufer registry, add support for it if needed to cache the buffer");
@@ -522,6 +553,22 @@ void VertexBufferGPUManager::setupVertexBufferInfos()
 	}
 	#endif
 
+	//StdMesh with all attributes in separate buffers
+	{
+		PEVertexBufferInfo info(*m_pContext, m_arena, PEVertexFormatLayout_ParticleMesh_B0__P0f3_TC0f2_C0f4);
+		info.m_bufferInfos.reset(1);
+		PEVertexAttributeBufferInfo buf0;
+		// position
+		buf0.m_attributeInfos[buf0.m_numAttributes++] = PEVertexAttributeInfo(0 * 4, PEScalarType_Float, 3, PESemanticType_Position, "position", 0);
+		buf0.m_attributeInfos[buf0.m_numAttributes++] = PEVertexAttributeInfo(3 * 4, PEScalarType_Float, 2, PESemanticType_TexCoord, "texcoord", 0);
+		buf0.m_attributeInfos[buf0.m_numAttributes++] = PEVertexAttributeInfo(5 * 4, PEScalarType_Float, 4, PESemanticType_Color, "color", 0);
+		info.m_bufferInfos.add(buf0);
+
+		info.setAPIValues();
+
+		m_vertexBufferInfos[info.m_vertexFormatLayout] = info;
+		m_layoutToFormatMap[info.m_vertexFormatLayout] = PEVertexFormat_ParticleMesh;
+	}
 }
 
 }; // namespace PE

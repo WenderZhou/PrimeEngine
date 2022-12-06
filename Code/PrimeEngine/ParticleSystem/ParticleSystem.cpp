@@ -44,8 +44,8 @@ void ParticleMesh::loadFrom3DPoints_needsRC(float* vals, int numParticles, const
 		mcpu.m_hTexCoordBufferCPU = Handle("TEXCOORD_BUFFER_CPU", sizeof(TexCoordBufferCPU));
 		TexCoordBufferCPU* ptcb = new(mcpu.m_hTexCoordBufferCPU) TexCoordBufferCPU(*m_pContext, m_arena);
 
-		mcpu.m_hNormalBufferCPU = Handle("NORMAL_BUFFER_CPU", sizeof(NormalBufferCPU));
-		NormalBufferCPU* pnb = new(mcpu.m_hNormalBufferCPU) NormalBufferCPU(*m_pContext, m_arena);
+		mcpu.m_hColorBufferCPU = Handle("COLOR_BUFFER_CPU", sizeof(ColorBufferCPU));
+		ColorBufferCPU* pcb = new(mcpu.m_hColorBufferCPU) ColorBufferCPU(*m_pContext, m_arena);
 
 		mcpu.m_hMaterialSetCPU = Handle("MATERIAL_SET_CPU", sizeof(MaterialSetCPU));
 		MaterialSetCPU* pmscpu = new(mcpu.m_hMaterialSetCPU) MaterialSetCPU(*m_pContext, m_arena);
@@ -61,12 +61,12 @@ void ParticleMesh::loadFrom3DPoints_needsRC(float* vals, int numParticles, const
 
 	PositionBufferCPU* pVB = mcpu.m_hPositionBufferCPU.getObject<PositionBufferCPU>();
 	TexCoordBufferCPU* pTCB = mcpu.m_hTexCoordBufferCPU.getObject<TexCoordBufferCPU>();
-	NormalBufferCPU* pNB = mcpu.m_hNormalBufferCPU.getObject<NormalBufferCPU>();
+	ColorBufferCPU* pCB = mcpu.m_hColorBufferCPU.getObject<ColorBufferCPU>();
 	IndexBufferCPU* pIB = mcpu.m_hIndexBufferCPU.getObject<IndexBufferCPU>();
 
 	pVB->m_values.reset(numParticles * 4 * 3);
 	pTCB->m_values.reset(numParticles * 4 * 2);
-	pNB->m_values.reset(numParticles * 4 * 3);
+	pCB->m_values.reset(numParticles * 4 * 4);
 	pIB->m_values.reset(numParticles * 6);
 
 	pIB->m_indexRanges[0].m_start = 0;
@@ -79,20 +79,20 @@ void ParticleMesh::loadFrom3DPoints_needsRC(float* vals, int numParticles, const
 
 	for (int ip = 0; ip < numParticles; ip++)
 	{
-		pVB->m_values.add(vals[ip * 24 + 0], vals[ip * 24 + 1], vals[ip * 24 + 2]);
-		pVB->m_values.add(vals[ip * 24 + 3], vals[ip * 24 + 4], vals[ip * 24 + 5]);
-		pVB->m_values.add(vals[ip * 24 + 6], vals[ip * 24 + 7], vals[ip * 24 + 8]);
-		pVB->m_values.add(vals[ip * 24 + 9], vals[ip * 24 + 10], vals[ip * 24 + 11]);
+		pVB->m_values.add(vals[ip * 28 + 0], vals[ip * 28 + 1], vals[ip * 28 + 2]);
+		pVB->m_values.add(vals[ip * 28 + 3], vals[ip * 28 + 4], vals[ip * 28 + 5]);
+		pVB->m_values.add(vals[ip * 28 + 6], vals[ip * 28 + 7], vals[ip * 28 + 8]);
+		pVB->m_values.add(vals[ip * 28 + 9], vals[ip * 28 + 10], vals[ip * 28 + 11]);
 
 		pTCB->m_values.add(0.5f, 0.125f);
 		pTCB->m_values.add(0.625f, 0.125f);
 		pTCB->m_values.add(0.625f, 0.25f);
 		pTCB->m_values.add(0.5f, 0.25f);
 
-		pNB->m_values.add(vals[ip * 24 + 12], vals[ip * 24 + 13], vals[ip * 24 + 14]);
-		pNB->m_values.add(vals[ip * 24 + 15], vals[ip * 24 + 16], vals[ip * 24 + 17]);
-		pNB->m_values.add(vals[ip * 24 + 18], vals[ip * 24 + 19], vals[ip * 24 + 20]);
-		pNB->m_values.add(vals[ip * 24 + 21], vals[ip * 24 + 22], vals[ip * 24 + 23]);
+		pCB->m_values.add(vals[ip * 28 + 12], vals[ip * 28 + 13], vals[ip * 28 + 14], vals[ip * 28 + 15]);
+		pCB->m_values.add(vals[ip * 28 + 16], vals[ip * 28 + 17], vals[ip * 28 + 18], vals[ip * 28 + 19]);
+		pCB->m_values.add(vals[ip * 28 + 20], vals[ip * 28 + 21], vals[ip * 28 + 22], vals[ip * 28 + 23]);
+		pCB->m_values.add(vals[ip * 28 + 24], vals[ip * 28 + 25], vals[ip * 28 + 26], vals[ip * 28 + 27]);
 
 		pIB->m_values.add(ip * 4 + 0, ip * 4 + 1, ip * 4 + 2);
 		pIB->m_values.add(ip * 4 + 2, ip * 4 + 3, ip * 4 + 0);
@@ -103,7 +103,7 @@ void ParticleMesh::loadFrom3DPoints_needsRC(float* vals, int numParticles, const
 		// first time creating gpu mesh
 		loadFromMeshCPU_needsRC(mcpu, threadOwnershipMask);
 
-		Handle hEffect = EffectManager::Instance()->getEffectHandle("StdMesh_Particle_Tech"); 
+		Handle hEffect = EffectManager::Instance()->getEffectHandle("ParticleMesh_Tech"); 
 		
 		for (int imat = 0; imat < m_effects.m_size; imat++)
 		{
@@ -158,8 +158,8 @@ ParticleRenderer::ParticleRenderer(PE::GameContext& context, PE::MemoryArena are
 	m_particleProperty.lifeTime = 3.0f;
 	m_particleProperty.lifeTimeVariation = 1.0f;
 
-	m_particleProperty.colorBegin = Vector3(1.0f, 1.0f, 0.0f);
-	m_particleProperty.colorEnd = Vector3(1.0f, 0.0f, 0.0f);
+	m_particleProperty.colorBegin = Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+	m_particleProperty.colorEnd = Vector4(1.0f, 0.0f, 0.0f, 0.3f);
 
 	m_particleProperty.sizeBegin = 1.0f;
 	m_particleProperty.sizeEnd = 0.2f;
@@ -284,7 +284,7 @@ void ParticleRenderer::postPreDraw(int& threadOwnershipMask)
 			validParticleCnt++;
 	}
 
-	vertexData.reset(validParticleCnt * 24);
+	vertexData.reset(validParticleCnt * 28);
 
 	Vector3 camU = pcam->m_worldTransform.getU();
 	Vector3 camV = pcam->m_worldTransform.getV();
@@ -305,10 +305,10 @@ void ParticleRenderer::postPreDraw(int& threadOwnershipMask)
 			vertexData.add(vtx3.m_x); vertexData.add(vtx3.m_y); vertexData.add(vtx3.m_z);
 			vertexData.add(vtx4.m_x); vertexData.add(vtx4.m_y); vertexData.add(vtx4.m_z);
 
-			vertexData.add(particle.color.m_x); vertexData.add(particle.color.m_y); vertexData.add(particle.color.m_z);
-			vertexData.add(particle.color.m_x); vertexData.add(particle.color.m_y); vertexData.add(particle.color.m_z);
-			vertexData.add(particle.color.m_x); vertexData.add(particle.color.m_y); vertexData.add(particle.color.m_z);
-			vertexData.add(particle.color.m_x); vertexData.add(particle.color.m_y); vertexData.add(particle.color.m_z);
+			vertexData.add(particle.color.m_r); vertexData.add(particle.color.m_g); vertexData.add(particle.color.m_b); vertexData.add(particle.color.m_a);
+			vertexData.add(particle.color.m_r); vertexData.add(particle.color.m_g); vertexData.add(particle.color.m_b); vertexData.add(particle.color.m_a);
+			vertexData.add(particle.color.m_r); vertexData.add(particle.color.m_g); vertexData.add(particle.color.m_b); vertexData.add(particle.color.m_a);
+			vertexData.add(particle.color.m_r); vertexData.add(particle.color.m_g); vertexData.add(particle.color.m_b); vertexData.add(particle.color.m_a);
 		}
 	}
 

@@ -181,6 +181,10 @@ void chooseEffects(MaterialCPU &curMatCpu, bool hasBlendShapes, EPEVertexFormat 
 			//shadowMapEffects.add(EffectManager::Instance()->getEffectHandle("StdMesh_ZOnly_Tech"));
 			//instanceEffects;//todo: create instance effects = EffectManager::Instance()->getEffectHandle("DetailedMesh_Shadowed_A_Glow_Tech");
 		}
+		else if (format == PEVertexFormat_ParticleMesh)
+		{
+			effects.add(EffectManager::Instance()->getEffectHandle("ParticleMesh_Tech"));
+		}
 	}
 	else
 	{
@@ -333,7 +337,10 @@ EPEVertexFormat Mesh::updateGeoFromMeshCPU_needsRC(MeshCPU &mcpu, int &threadOwn
 			if (mcpu.m_hSkinWeightsCPU.isValid())
 				PEWARN("Geometry for mesh has skin data, but no normal data so we are choosing minimal color buffer mesh, that doesnt have skinning, so discarding skinning buffer data");
 
-			res = PEVertexFormat_ColoredMinimalMesh;
+			if (mcpu.m_hTexCoordBufferCPU.isValid())
+				res = PEVertexFormat_ParticleMesh;
+			else
+				res = PEVertexFormat_ColoredMinimalMesh;
 		}
 		else
 		{
@@ -393,6 +400,15 @@ EPEVertexFormat Mesh::updateGeoFromMeshCPU_needsRC(MeshCPU &mcpu, int &threadOwn
 				mcpu.m_hTangentBufferCPU,
 				!mcpu.m_manualBufferManagement
 				);
+		}
+		break;
+	case PEVertexFormat_ParticleMesh:
+		{
+			m_hVertexBufferGPU = VertexBufferGPUManager::Instance()->createGPUBufferFromVBufTCBufCBuf(
+				mcpu.m_hPositionBufferCPU,
+				mcpu.m_hTexCoordBufferCPU,
+				mcpu.m_hColorBufferCPU,
+				!mcpu.m_manualBufferManagement);
 		}
 		break;
 	}
